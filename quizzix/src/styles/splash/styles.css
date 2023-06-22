@@ -1,5 +1,5 @@
 body {
-    margin: 0; 
+    margin: 0;
 }
 
 .container {
@@ -14,7 +14,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     max-width: 100%;
-    height: 100%;  
+    height: 100%;
 }
 
 .white-text {
@@ -23,9 +23,223 @@ body {
 
 #logo {
     border-radius: 50%;
-    box-shadow: 0 0 100px 10px #b386b4;
 }
 
-#splash-content { 
+@keyframes glowing {
+    0% {
+        background-color: transparent;
+        box-shadow: 0 0 5px #b386b4;
+    }
+
+    50% {
+        background-color: transparent;
+        box-shadow: 0 0 50px #b386b4;
+    }
+
+    100% {
+        background-color: transparent;
+        box-shadow: 0 0 5px #b386b4;
+    }
+}
+
+#logo {
+    animation: glowing 2500ms infinite;
+}
+
+#splash-content {
     margin: auto;
+}
+
+::placeholder {
+    color: grey;
+    opacity: 1;
+}
+
+#input-form {
+    background-color: transparent;
+    border: 1px solid #555;
+    border-radius: 5px;
+    padding: 5px;
+    caret-color: #fff;
+    color: #fff;
+}
+
+/* Buttons */
+
+.button,
+.button *,
+.button :after,
+.button :before,
+.button:after,
+.button:before {
+    border: 0 solid;
+    box-sizing: border-box;
+}
+
+.button {
+    -webkit-tap-highlight-color: transparent;
+    background-color: transparent;
+    background-image: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 100%;
+    font-weight: 900;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+}
+
+.button:disabled {
+    cursor: default;
+}
+
+.button:-moz-focusring {
+    outline: auto;
+}
+
+.button svg {
+    display: block;
+    vertical-align: middle;
+}
+
+.button [hidden] {
+    display: none;
+}
+
+.button {
+    --tilt: 10px;
+    border-width: 1px;
+    display: grid;
+    padding: 0.5rem;
+    place-content: center;
+}
+
+.button,
+.button .text-container {
+    overflow: hidden;
+    position: relative;
+}
+
+.button .text-container {
+    display: block;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+}
+
+.button .text {
+    display: block;
+    font-weight: 900;
+    mix-blend-mode: difference;
+    position: relative;
+}
+
+.button:hover .text {
+    -webkit-animation: move-right-alternate 0.3s ease forwards;
+    animation: move-right-alternate 0.3s ease forwards;
+    color: #b386b4;
+}
+
+@-webkit-keyframes move-right-alternate {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(80%);
+    }
+
+    51% {
+        transform: translateX(-80%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes move-right-alternate {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(80%);
+    }
+
+    51% {
+        transform: translateX(-80%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+.button:before {
+    -webkit-animation: move-out 0.3s ease;
+    animation: move-out 0.3s ease;
+    background: #b386b4;
+    -webkit-clip-path: polygon(0 0,
+            calc(100% - var(--tilt)) 0,
+            100% 50%,
+            calc(100% - var(--tilt)) 100%,
+            0 100%);
+    clip-path: polygon(0 0,
+            calc(100% - var(--tilt)) 0,
+            100% 50%,
+            calc(100% - var(--tilt)) 100%,
+            0 100%);
+    content: "";
+    height: 100%;
+    left: calc(-100% - var(--tilt));
+    position: absolute;
+    top: 0;
+    width: calc(100% + var(--tilt));
+}
+
+.button:hover:before {
+    -webkit-animation: move-in 0.3s ease forwards;
+    animation: move-in 0.3s ease forwards;
+}
+
+@-webkit-keyframes move-in {
+    0% {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes move-in {
+    0% {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
+
+@-webkit-keyframes move-out {
+    0% {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(200%);
+    }
+}
+
+@keyframes move-out {
+    0% {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(200%);
+    }
 }
