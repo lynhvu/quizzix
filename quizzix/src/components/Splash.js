@@ -27,7 +27,7 @@ function Splash() {
 
         {/* search bar */}
         <div>
-          <div className="input-group mb-3">
+          <div className="mb-3">
             <input
               type="text"
               className="col-sm-12"

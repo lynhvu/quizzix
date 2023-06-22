@@ -70,8 +70,8 @@ body {
 .button *,
 .button :after,
 .button :before,
-.button:after,
-.button:before {
+.button :after,
+.button :before {
     border: 0 solid;
     box-sizing: border-box;
 }
@@ -202,6 +202,7 @@ body {
 .button:hover:before {
     -webkit-animation: move-in 0.3s ease forwards;
     animation: move-in 0.3s ease forwards;
+    color: #b386b4;
 }
 
 @-webkit-keyframes move-in {
