@@ -1,19 +1,20 @@
 import "../styles/splash/styles.css";
 import Default from "./Default";
+import React, { useEffect } from "react";
+import {
+    BrowserRouter as Router,
+    Route,
+    Routes,
+    Link
+  } from "react-router-dom";
 
 function Splash() {
+  
+
   return (
     <div className="container bg">
       <div className="text-center" id="splash-content">
-        
-        <Default></Default>
-
-        {/* intro */}
-        <div className="mx-auto">
-          <p className="lead mb-4 white-text">
-            Ignite your intellect and embrace the quizzing adventure!
-          </p>
-        </div>
+        <Default text="Ignite your intellect and embrace the quizzing adventure!"></Default>
 
         {/* search bar */}
         <div>
@@ -28,14 +29,14 @@ function Splash() {
         </div>
 
         {/* buttons */}
-        <div class="d-grid gap-2 d-flex justify-content-center">
-          <button type="submit" className="btn-md px-4 button">
-
-            <span class="text-container">
-              <span class="text">Next</span>
-            </span>
-            
-          </button>
+        <div className="d-grid gap-2 d-flex justify-content-center">
+          <div className="d-grid gap-2 d-flex justify-content-center">
+            <Link to="/difficulty">
+            <button type="submit" className="next-btn" id="next">
+              <span>Next</span>
+            </button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

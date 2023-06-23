@@ -246,6 +246,106 @@ body {
     }
 }
 
+.next-btn,
+.next-btn *,
+.next-btn :after,
+.next-btn :before,
+.next-btn:after,
+.next-btn:before {
+  border: 0 solid;
+  box-sizing: border-box;
+}
+.next-btn {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: button;
+  background-color: #000;
+  background-image: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-size: 100%;
+  font-weight: 900;
+  line-height: 1.5;
+  margin: 0;
+  -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+  padding: 0;
+  text-transform: uppercase;
+}
+.next-btn:disabled {
+  cursor: default;
+}
+.next-btn:-moz-focusring {
+  outline: auto;
+}
+.next-btn svg {
+  display: block;
+  vertical-align: middle;
+}
+.next-btn [hidden] {
+  display: none;
+}
+.next-btn {
+  --background: #000;
+  background: none;
+  overflow: hidden;
+  padding: 0.7rem 2rem;
+  position: relative;
+}
+.next-btn span {
+  display: block;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+.next-btn:after,
+.next-btn:before {
+  --tilt: 20px;
+  background: #fff;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 50%, 100% 100%, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 50%, 100% 100%, 0 100%);
+  content: "";
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: -webkit-clip-path 0.2s ease;
+  transition: clip-path 0.2s ease;
+  transition: clip-path 0.2s ease, -webkit-clip-path 0.2s ease;
+  width: 100%;
+  z-index: -1;
+}
+.next-btn:after {
+  --thickness: 1px;
+  background: var(--background);
+  height: calc(100% - var(--thickness) * 2);
+  left: var(--thickness);
+  top: var(--thickness);
+  width: calc(100% - var(--thickness) * 2);
+}
+.next-btn:hover span {
+  transform: translateX(-20px);
+}
+.next-btn:hover:after,
+.next-btn:hover:before {
+  -webkit-clip-path: polygon(
+    0 0,
+    calc(100% - var(--tilt)) 0,
+    100% 50%,
+    calc(100% - var(--tilt)) 100%,
+    0 100%
+  );
+  clip-path: polygon(
+    0 0,
+    calc(100% - var(--tilt)) 0,
+    100% 50%,
+    calc(100% - var(--tilt)) 100%,
+    0 100%
+  );
+}
+
+
 /* Level buttons */
 .lv-btn,
 .lv-btn *,
