@@ -5,16 +5,20 @@ import React, { useEffect, useState } from "react";
 import { addInputToStorage } from "./StoreInputs";
 
 function Difficulty() {
+  // initialize the useState
   const [selectedLevel, setSelectedLevel] = useState("");
+
   useEffect(() => {
+    // get element by ID
     const easyBtn = document.getElementById("easy-btn");
     const medBtn = document.getElementById("med-btn");
     const hardBtn = document.getElementById("hard-btn");
 
+    // function to handle the click
     const handleEasyButtonClick = () => {
       setSelectedLevel("easy");
       addInputToStorage("level", "easy");
-    }
+    };
     const handleMedButtonClick = () => {
       setSelectedLevel("medium");
       addInputToStorage("level", "medium");
@@ -24,6 +28,7 @@ function Difficulty() {
       addInputToStorage("level", "hard");
     };
 
+    // event listeners to trigger actions
     easyBtn.addEventListener("click", function () {
       addInputToStorage("level", "easy");
     });
@@ -33,14 +38,14 @@ function Difficulty() {
     hardBtn.addEventListener("click", function () {
       addInputToStorage("level", "hard");
     });
+
+    // // Clean up the event listener when the component unmounts
     return () => {
       easyBtn.removeEventListener("click", handleEasyButtonClick);
       medBtn.removeEventListener("click", handleMedButtonClick);
       hardBtn.removeEventListener("click", handleHardButtonClick);
     };
   }, []);
-
-
 
   return (
     <div className="container bg">

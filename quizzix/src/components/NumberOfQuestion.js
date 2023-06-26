@@ -6,16 +6,19 @@ function NumberOfQuestion() {
   useEffect(() => {
     const numElement = document.getElementById("input-form");
     const submitElement = document.getElementById("submit-btn");
+
+    // function that would add the input into the storage
     const handleClick = () => {
-      
-      addInputToStorage("numberOfQuestion", numElement.textContent);
+      console.log(numElement.value);
+      addInputToStorage("numberOfQuestion", numElement.value);
     };
 
+    // when clicked, it will trigger the handleClick function
     submitElement.addEventListener("click", handleClick);
+
+    // Clean up the event listener when the component unmounts
     return () => {
-      return () => {
-        submitElement.removeEventListener("click", handleClick);
-      };
+      submitElement.removeEventListener("click", handleClick);
     };
   }, []);
 
