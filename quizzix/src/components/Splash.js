@@ -2,9 +2,10 @@ import "../styles/splash/styles.css";
 import Default from "./Default";
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { addInputToStorage } from "./StoreInputs";
 
 function Splash() {
-
+  // JS code to get the list of topic from the API
   useEffect(() => {
     const datalist = document.getElementById("topic-selection");
     const input = document.getElementById("browser-input");
@@ -22,8 +23,12 @@ function Splash() {
           const optionElement = document.createElement("option");
           optionElement.id = "dark-text";
           optionElement.textContent = option.name;
-          console.log(optionElement);
-          
+          //console.log(optionElement);
+
+          // Set the ID as a data attribute on the option element
+          optionElement.dataset.id = option.id;
+
+          // add option to the list
           datalist.appendChild(optionElement);
         });
       } catch (error) {
@@ -35,6 +40,21 @@ function Splash() {
     if (input) {
       input.addEventListener("input", fetchOptionsFromAPI);
     }
+
+    // Get a reference to the <select> element
+    const selectElement = document.getElementById("topic-selection");
+
+    // Add an event listener to the <select> element
+    selectElement.addEventListener("change", function () {
+      const selectedOption = this.options[this.selectedIndex];
+      const selectedName = selectedOption.textContent;
+      const selectedId = selectedOption.dataset.id;
+
+      console.log("Name:", selectedName);
+      console.log("ID:", selectedId);
+
+      addInputToStorage("categoryID", selectedId);
+    });
   }, []);
 
   return (
@@ -42,19 +62,15 @@ function Splash() {
       <div className="text-center" id="splash-content">
         <Default text="Ignite your intellect and embrace the quizzing adventure!"></Default>
 
-        {/* search bar */}
+        {/* drop down menu */}
         <div>
           <div className="mb-3">
-            {/* <input
-              type="text"
-              className="col-sm-12"
-              id="input-form"
-              placeholder="Enter a topic"
-            /> */}
-
             <div className="col-md-4">
               <select id="topic-selection" className="form-select" required="">
-                <option value="" id="dark-text hide" disabled selected>Choose a topic</option>
+                <option value="" id="dark-text hide" disabled selected>
+                  Choose a topic
+                </option>
+                console.log();
               </select>
               <div className="invalid-feedback">
                 Please provide a valid topic.

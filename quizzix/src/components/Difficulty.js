@@ -1,8 +1,14 @@
 import Default from "./Default";
 import "../styles/splash/styles.css";
 import {Link} from "react-router-dom";
+import React, { useEffect } from "react";
+import { addInputToStorage } from "./StoreInputs";
 
 function Difficulty() {
+  useEffect(() => {
+
+  })
+  
   return (
     <div className="container bg">
       <div className="text-center" id="splash-content">
