@@ -1,61 +1,64 @@
 import "../styles/splash/styles.css";
 import Default from "./Default";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import { addInputToStorage } from "./StoreInputs";
 
 function Splash() {
-  // JS code to get the list of topic from the API
-  useEffect(() => {
-    const datalist = document.getElementById("topic-selection");
-    const input = document.getElementById("browser-input");
 
-    // Function to fetch data from API
-    async function fetchOptionsFromAPI() {
-      try {
-        const response = await fetch("https://opentdb.com/api_category.php");
-        const data = await response.json();
+    const [selectTopic, setSelectTopic] = useState("");
+    // JS code to get the list of topic from the API
+    useEffect(() => {
+      const datalist = document.getElementById("topic-selection");
+      const input = document.getElementById("browser-input");
 
-        const categories = data.trivia_categories;
+      // Function to fetch data from API
+      async function fetchOptionsFromAPI() {
+        try {
+          const response = await fetch("https://opentdb.com/api_category.php");
+          const data = await response.json();
 
-        // Create new options based on API data
-        categories.forEach((option) => {
-          const optionElement = document.createElement("option");
-          optionElement.id = "dark-text";
-          optionElement.textContent = option.name;
-          //console.log(optionElement);
+          const categories = data.trivia_categories;
 
-          // Set the ID as a data attribute on the option element
-          optionElement.dataset.id = option.id;
+          // Create new options based on API data
+          categories.forEach((option) => {
+            const optionElement = document.createElement("option");
+            optionElement.id = "dark-text";
+            optionElement.textContent = option.name;
+            //console.log(optionElement);
 
-          // add option to the list
-          datalist.appendChild(optionElement);
-        });
-      } catch (error) {
-        console.error("Error fetching options:", error);
+            // Set the ID as a data attribute on the option element
+            optionElement.dataset.id = option.id;
+
+            // add option to the list
+            datalist.appendChild(optionElement);
+          });
+        } catch (error) {
+          console.error("Error fetching options:", error);
+        }
       }
-    }
-    fetchOptionsFromAPI();
-    // Example: Fetch options from API when input value changes
-    if (input) {
-      input.addEventListener("input", fetchOptionsFromAPI);
-    }
+      fetchOptionsFromAPI();
+      // Example: Fetch options from API when input value changes
+      if (input) {
+        input.addEventListener("input", fetchOptionsFromAPI);
+      }
 
-    // Get a reference to the <select> element
-    const selectElement = document.getElementById("topic-selection");
+      // Get a reference to the <select> element
+      const selectTopicElement = document.getElementById("topic-selection");
 
-    // Add an event listener to the <select> element
-    selectElement.addEventListener("change", function () {
-      const selectedOption = this.options[this.selectedIndex];
-      const selectedName = selectedOption.textContent;
-      const selectedId = selectedOption.dataset.id;
+      // Add an event listener to the <select> element
+      selectTopicElement.addEventListener("change", function () {
+        const selectedOption = this.options[this.selectedIndex];
+        const selectedName = selectedOption.textContent;
+        const selectedId = selectedOption.dataset.id;
 
-      console.log("Name:", selectedName);
-      console.log("ID:", selectedId);
+        console.log("Name:", selectedName);
+        console.log("ID:", selectedId);
 
-      addInputToStorage("categoryID", selectedId);
-    });
-  }, []);
+        setSelectTopic(selectedId);
+        addInputToStorage("categoryID", selectedId);
+      });
+    }, []);
 
   return (
     <div className="container bg">
