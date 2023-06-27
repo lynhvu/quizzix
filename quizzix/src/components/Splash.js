@@ -68,7 +68,7 @@ function Splash() {
         {/* drop down menu */}
         <div>
           <div className="mb-3">
-            <div className="col-md-4">
+            <div className="col-md">
               <select id="topic-selection" className="form-select" required="">
                 <option value="" id="dark-text hide" disabled selected>
                   Choose a topic
