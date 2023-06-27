@@ -48,6 +48,7 @@
     border: 2px solid #2e1e2e;
     border-radius: 15px;
     margin: 5px 20px;
+    background-color: rgba(228, 215, 250, 0.366);
 }
 
 .grid-item:hover {
