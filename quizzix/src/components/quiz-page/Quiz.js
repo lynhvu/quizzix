@@ -6,14 +6,12 @@ import Answers from "./Answers";
 function Quiz() {
   const [correctAnswer, setCorrectAnswer] = useState("");
   const [incorrectAnswers, setIncorrectAnswers] = useState([]);
+  const [curQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
   // get data from local storage
   let topic = getInputFromStorage("categoryID");
   let level = getInputFromStorage("level");
   let numQuestion = getInputFromStorage("numberOfQuestion");
-
-  // initialize
-  let curQuestionIndex = 0;
 
   useEffect(() => {
     fetchQuestionFromAPI();
@@ -59,6 +57,8 @@ function Quiz() {
     }
   }
 
+ 
+
   return (
     <div className="container bg">
       <div className="content">
@@ -77,6 +77,7 @@ function Quiz() {
             <Answers
               correctAnswer={correctAnswer}
               incorrectAnswers={incorrectAnswers}
+              
             />
           </div>
         </div>

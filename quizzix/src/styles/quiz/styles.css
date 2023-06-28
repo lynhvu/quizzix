@@ -61,13 +61,41 @@
     background-color: rgb(228, 215, 250);
 }
 
-.wrong {
-    background-color: rgba(255, 81, 0, 0.86);
+.incorrect {
+    background-color: rgba(255, 0, 0, 0.86);
+    padding: 20px;
+    font-size: 30px;
+    text-align: left;
+    border: 2px solid #2e1e2e;
+    border-radius: 15px;
+    margin: 5px 20px;
+    color: whitesmoke;
 }
 
 .correct {
-    background-color: green;   
+    background-color: green;  
+    padding: 20px;
+    font-size: 30px;
+    text-align: left;
+    border: 2px solid #2e1e2e;
+    border-radius: 15px;
+    margin: 5px 20px;
+    color: whitesmoke;
 }
+
+.disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+    
+  }
+
+  .disabled:hover {
+    background-color: inherit !important;
+    color: inherit !important;
+    border: none !important;
+    outline: none !important;
+  }
+  
 
 /* Buttons */
 .answer-btn,

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-const Answers = ({ correctAnswer, incorrectAnswers, onAnswer }) => {
+const Answers = ({ correctAnswer, incorrectAnswers }) => {
   const [shuffledAnswers, setShuffledAnswers] = useState([]);
+  const [disableAnswers, setDisableAnswers] = useState(false);
+  
   // Concatenate the correct and incorrect answers into a single array
   const answers = [correctAnswer, ...incorrectAnswers];
 
@@ -17,17 +19,25 @@ const Answers = ({ correctAnswer, incorrectAnswers, onAnswer }) => {
     return array.sort(() => Math.random() - 0.5);
   }
 
-  function handleAnswerClick(answer) {
-    const getAnswer = document.getElementById("answers");
+  function handleAnswerClick(answer, index) {
+    const buttonID = `answer-${index}`;
     if (answer === correctAnswer) {
-        
+        document.getElementById(buttonID).className = "correct";
+        setDisableAnswers(true);
+    } else {
+        document.getElementById(buttonID).className = "incorrect";
     }
   }
 
   return (
     <div className="grid-container">
       {shuffledAnswers.map((answer, index) => (
-        <button key={index} className="grid-item" id="answers">
+        <button 
+        key={index} 
+        className="grid-item" 
+        id={`answer-${index}`} 
+        onClick={() => handleAnswerClick(answer, index)}
+        disabled={disableAnswers}>
           {answer}
         </button>
       ))}
