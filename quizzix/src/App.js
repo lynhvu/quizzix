@@ -8,7 +8,7 @@ import {
 import Splash from './components/Splash'
 import Difficulty from './components/Difficulty';
 import NumberOfQuestion from './components/NumberOfQuestion';
-import Quiz from './components/Quiz';
+import Quiz from './components/quiz-page/Quiz';
 
 function App() {
   return (
