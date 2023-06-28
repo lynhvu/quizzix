@@ -33,10 +33,10 @@ function Quiz() {
       const getQuestionText = document.getElementById("question-text");
 
       if (curQuestionIndex < questions.length) {
-
         // question number
         getQuestionNum.textContent = `Question ${curQuestionIndex + 1} of ${
-          questions.length}`;
+          questions.length
+        }`;
 
         // display question text
         const curQuestion = questions[curQuestionIndex];
@@ -49,9 +49,6 @@ function Quiz() {
         setCorrectAnswer(curQuestion.correct_answer);
         setIncorrectAnswers(curQuestion.incorrect_answers);
 
-        
-
-          
         curQuestionIndex++;
       } else {
         console.log("No more questions available");
@@ -64,19 +61,33 @@ function Quiz() {
 
   return (
     <div className="container bg">
-      <div className="custom-container" id="quiz-bg">
-        <div className="row">
-          {/* question */}
-          <div id="question-field">
-            <h1 id="question-num"></h1>
-            <p id="question-text"></p>
+      <div className="content">
+        <div className="custom-container mb-3" id="quiz-bg">
+          <div className="row">
+            {/* question */}
+            <div id="question-field">
+              <h1 id="question-num"></h1>
+              <p id="question-text"></p>
+            </div>
+          </div>
+
+          {/* answer options */}
+          <div className="row" id="answer-display">
+            {/* display the answer */}
+            <Answers
+              correctAnswer={correctAnswer}
+              incorrectAnswers={incorrectAnswers}
+            />
           </div>
         </div>
 
-        {/* answer options */}
-
-        <div className="row" id="answer-display">
-        <Answers correctAnswer={correctAnswer} incorrectAnswers={incorrectAnswers}/>
+        {/* buttons */}
+        <div className="d-grid gap-2 d-flex justify-content-center">
+          <div className="d-grid gap-2 d-flex justify-content-center">
+            <button type="submit" className="next-btn" id="next">
+              <span>Next question</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>

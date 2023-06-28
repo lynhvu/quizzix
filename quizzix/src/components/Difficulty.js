@@ -49,7 +49,7 @@ function Difficulty() {
 
   return (
     <div className="container bg">
-      <div className="text-center" id="splash-content">
+      <div className="text-center splash-content">
         <Default text="Choose a difficult level"></Default>
 
         {/* buttons */}

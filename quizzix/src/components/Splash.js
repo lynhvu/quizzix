@@ -61,19 +61,18 @@ function Splash() {
     }, []);
 
   return (
-    <div className="container bg">
-      <div className="text-center" id="splash-content">
+  <div className="container bg">
+      <div className="text-center splash-content" id="splash-content">
         <Default text="Ignite your intellect and embrace the quizzing adventure!"></Default>
 
         {/* drop down menu */}
         <div>
           <div className="mb-3">
             <div className="col-md">
-              <select id="topic-selection" className="form-select" required="">
+              <select id="topic-selection" className="form-select" required="true">
                 <option value="" id="dark-text hide" disabled selected>
                   Choose a topic
                 </option>
-                console.log();
               </select>
               <div className="invalid-feedback">
                 Please provide a valid topic.
