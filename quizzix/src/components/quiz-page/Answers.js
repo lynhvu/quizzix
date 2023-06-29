@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 const Answers = ({ correctAnswer, incorrectAnswers }) => {
   const [shuffledAnswers, setShuffledAnswers] = useState([]);
   const [disableAnswers, setDisableAnswers] = useState(false);
-  
+
   // Concatenate the correct and incorrect answers into a single array
   const answers = [correctAnswer, ...incorrectAnswers];
 
@@ -34,7 +34,7 @@ const Answers = ({ correctAnswer, incorrectAnswers }) => {
       {shuffledAnswers.map((answer, index) => (
         <button 
         key={index} 
-        className="grid-item" 
+        className="grid-item fs-2 fs-sm-2" 
         id={`answer-${index}`} 
         onClick={() => handleAnswerClick(answer, index)}
         disabled={disableAnswers}>

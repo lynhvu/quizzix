@@ -57,38 +57,37 @@ function Quiz() {
     }
   }
 
- 
-
   return (
     <div className="container bg">
-      <div className="content">
-        <div className="custom-container mb-3" id="quiz-bg">
-          <div className="row">
+      <div className="content mt-5 d-absolute">
+        <div className="quiz-bg" id="">
+          <div className="custom-container">
             {/* question */}
             <div id="question-field">
               <h1 id="question-num"></h1>
-              <p id="question-text"></p>
+              <p className="fs-2 fs-sm-5" id="question-text"></p>
             </div>
-          </div>
 
-          {/* answer options */}
-          <div className="row" id="answer-display">
-            {/* display the answer */}
-            <Answers
-              correctAnswer={correctAnswer}
-              incorrectAnswers={incorrectAnswers}
-              
-            />
+            {/* answer options */}
+            <div className="row" id="answer-display">
+              <div className="col-12">
+                <div className="row">
+                  {/* display the answer */}
+                  <Answers
+                    correctAnswer={correctAnswer}
+                    incorrectAnswers={incorrectAnswers}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
         {/* buttons */}
         <div className="d-grid gap-2 d-flex justify-content-center">
-          <div className="d-grid gap-2 d-flex justify-content-center">
-            <button type="submit" className="next-btn" id="next">
-              <span>Next question</span>
-            </button>
-          </div>
+          <button type="submit" className="next-btn mt-2" id="next">
+            <span>Next question</span>
+          </button>
         </div>
       </div>
     </div>
