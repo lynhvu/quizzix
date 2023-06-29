@@ -34,7 +34,7 @@ const Answers = ({ correctAnswer, incorrectAnswers }) => {
       {shuffledAnswers.map((answer, index) => (
         <button 
         key={index} 
-        className="grid-item fs-2 fs-sm-2" 
+        className="grid-item" 
         id={`answer-${index}`} 
         onClick={() => handleAnswerClick(answer, index)}
         disabled={disableAnswers}>

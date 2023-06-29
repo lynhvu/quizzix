@@ -59,7 +59,7 @@ function Quiz() {
 
   return (
     <div className="container bg">
-      <div className="content mt-5 d-absolute">
+      <div className="content mt-5">
         <div className="quiz-bg" id="">
           <div className="custom-container">
             {/* question */}
@@ -69,9 +69,9 @@ function Quiz() {
             </div>
 
             {/* answer options */}
-            <div className="row" id="answer-display">
+            <div className="" id="answer-display">
               <div className="col-12">
-                <div className="row">
+                <div className="">
                   {/* display the answer */}
                   <Answers
                     correctAnswer={correctAnswer}
