@@ -1,9 +1,12 @@
 import "../../styles/quiz/styles.css";
 import { getInputFromStorage } from "../StoreInputs";
+// import { fetchQuestionFromAPI } from "./fetchQuestionFromAPI";
 import React, { useEffect, useState } from "react";
 import Answers from "./Answers";
 
 function Quiz() {
+  const [disableAnswers, setDisableAnswers] = useState(false);
+
   const [correctAnswer, setCorrectAnswer] = useState("");
   const [incorrectAnswers, setIncorrectAnswers] = useState([]);
   const [curQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -13,8 +16,11 @@ function Quiz() {
   let level = getInputFromStorage("level");
   let numQuestion = getInputFromStorage("numberOfQuestion");
 
+  let nextBtnClick = document.getElementById("next-question");
+
   useEffect(() => {
     fetchQuestionFromAPI();
+    // nextBtnClick.addEventListener("submit", fetchQuestionFromAPI());
   }, []);
 
   async function fetchQuestionFromAPI() {
@@ -46,8 +52,6 @@ function Quiz() {
         // deadling with answers
         setCorrectAnswer(curQuestion.correct_answer);
         setIncorrectAnswers(curQuestion.incorrect_answers);
-
-        curQuestionIndex++;
       } else {
         console.log("No more questions available");
         // Handle the case when there are no more questions to display
@@ -56,6 +60,40 @@ function Quiz() {
       console.error("Error fetching options:", error);
     }
   }
+
+  const handleNextBtnClick = () => {
+    if (curQuestionIndex < 10) {
+      // change this later
+      resetAnswerBtn();
+      setCurrentQuestionIndex(curQuestionIndex + 1);
+      fetchQuestionFromAPI();
+    }
+  };
+
+  const resetAnswerBtn = () => {
+    // Get the access to the buttons' attributes
+    const parentAttribute = document.querySelector(".grid-container");
+    const buttons = parentAttribute.querySelectorAll("button");
+
+    // Loop through the buttons and access their classes
+    buttons.forEach((button) => {
+      // if (button.disabled) { // reset the disabled status
+      //   button.disabled = false;
+      // }
+      const btnClasses = button.classList;
+      if (btnClasses.contains("incorrect")) {
+        btnClasses.remove("incorrect");
+        
+      } 
+      else if (btnClasses.contains("correct")) {
+        btnClasses.remove("correct");
+        
+      } 
+      btnClasses.add("grid-item");
+    });
+    setDisableAnswers(false);
+  };
+
 
   return (
     <div className="container bg">
@@ -71,11 +109,14 @@ function Quiz() {
             {/* answer options */}
             <div className="" id="answer-display">
               <div className="col-12">
-                <div className="">
+                <div className="answer-btn">
                   {/* display the answer */}
                   <Answers
                     correctAnswer={correctAnswer}
                     incorrectAnswers={incorrectAnswers}
+                    disableAnswers={disableAnswers}
+                    setDisableAnswers={setDisableAnswers}
+                   
                   />
                 </div>
               </div>
@@ -83,9 +124,14 @@ function Quiz() {
           </div>
         </div>
 
-        {/* buttons */}
+        {/* next question button */}
         <div className="d-grid gap-2 d-flex justify-content-center">
-          <button type="submit" className="next-btn mt-2" id="next">
+          <button
+            type="submit"
+            className="next-btn mt-2"
+            id="next-question"
+            onClick={handleNextBtnClick}
+          >
             <span>Next question</span>
           </button>
         </div>

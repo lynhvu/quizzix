@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-const Answers = ({ correctAnswer, incorrectAnswers }) => {
+const Answers = ({ correctAnswer, incorrectAnswers,disableAnswers, setDisableAnswers }) => {
   const [shuffledAnswers, setShuffledAnswers] = useState([]);
-  const [disableAnswers, setDisableAnswers] = useState(false);
+  
 
   // Concatenate the correct and incorrect answers into a single array
   const answers = [correctAnswer, ...incorrectAnswers];
@@ -21,23 +21,28 @@ const Answers = ({ correctAnswer, incorrectAnswers }) => {
 
   function handleAnswerClick(answer, index) {
     const buttonID = `answer-${index}`;
+
     if (answer === correctAnswer) {
-        document.getElementById(buttonID).className = "correct";
-        setDisableAnswers(true);
+      document.getElementById(buttonID).className = "correct";
+      setDisableAnswers(true);
     } else {
-        document.getElementById(buttonID).className = "incorrect";
+      document.getElementById(buttonID).className = "incorrect";
+      setDisableAnswers(true);
     }
   }
 
   return (
     <div className="grid-container">
       {shuffledAnswers.map((answer, index) => (
-        <button 
-        key={index} 
-        className="grid-item" 
-        id={`answer-${index}`} 
-        onClick={() => handleAnswerClick(answer, index)}
-        disabled={disableAnswers}>
+        <button
+          key={index}
+          className={`grid-item`}
+          id={`answer-${index}`}
+          onClick={() => {
+            handleAnswerClick(answer, index);
+          }}
+          disabled={disableAnswers}
+        >
           {answer}
         </button>
       ))}
