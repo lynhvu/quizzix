@@ -5,10 +5,9 @@ import Answers from "./Answers";
 
 function Quiz() {
   const [disableAnswers, setDisableAnswers] = useState(false);
-
   const [correctAnswer, setCorrectAnswer] = useState("");
   const [incorrectAnswers, setIncorrectAnswers] = useState([]);
-  const [curQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [curQuestionIndex, setCurrentQuestionIndex] = useState(1);
 
   // get data from local storage
   let topic = getInputFromStorage("categoryID");
@@ -18,6 +17,32 @@ function Quiz() {
   useEffect(() => {
     fetchQuestionFromAPI();
   }, [curQuestionIndex]);
+
+  const renderBtn = () => {
+    if (curQuestionIndex < numQuestion) {
+      return (
+        <button
+            type="submit"
+            className="next-btn mt-2"
+            id="next-btn"
+            onClick={handleNextBtnClick}
+          >
+            <span id="btn-text">Next question</span>
+          </button>
+      )
+    } else {
+      return (
+        <button
+            type="submit"
+            className="lv-btn mt-2"
+            id="next-btn"
+            onClick={handleNextBtnClick}
+          >
+            <span id="btn-text">Submit</span>
+          </button>
+      )
+    }
+  };
 
   async function fetchQuestionFromAPI() {
     try {
@@ -32,16 +57,12 @@ function Quiz() {
 
       const getQuestionNum = document.getElementById("question-num");
       const getQuestionText = document.getElementById("question-text");
-
-      console.log("Fetching... " + curQuestionIndex);
-      if (curQuestionIndex < questions.length) {
+      if (curQuestionIndex <= questions.length) {
         // question number
-        getQuestionNum.textContent = `Question ${curQuestionIndex + 1} of ${
-          questions.length
-        }`;
+        getQuestionNum.textContent = `Question ${curQuestionIndex} of ${questions.length}`;
 
         // display question text
-        const curQuestion = questions[curQuestionIndex];
+        const curQuestion = questions[curQuestionIndex - 1];
         getQuestionText.textContent = `${curQuestion.question}`;
 
         // deadling with answers
@@ -57,10 +78,11 @@ function Quiz() {
   }
 
   const handleNextBtnClick = () => {
-    if (curQuestionIndex < 10) {
-      // change this later
-      
-      setCurrentQuestionIndex(curQuestionIndex + 1);    
+    if (curQuestionIndex - 1 < numQuestion) {
+      console.log("cur = " + curQuestionIndex + " total = " + numQuestion);
+      setCurrentQuestionIndex(curQuestionIndex + 1);
+    } else {
+      console.log("submit clicked");
     }
   };
 
@@ -112,14 +134,8 @@ function Quiz() {
 
         {/* next question button */}
         <div className="d-grid gap-2 d-flex justify-content-center">
-          <button
-            type="submit"
-            className="next-btn mt-2"
-            id="next-question"
-            onClick={handleNextBtnClick}
-          >
-            <span>Next question</span>
-          </button>
+          {renderBtn()}
+          
         </div>
       </div>
     </div>
