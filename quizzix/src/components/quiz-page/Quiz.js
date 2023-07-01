@@ -1,6 +1,5 @@
 import "../../styles/quiz/styles.css";
 import { getInputFromStorage } from "../StoreInputs";
-// import { fetchQuestionFromAPI } from "./fetchQuestionFromAPI";
 import React, { useEffect, useState } from "react";
 import Answers from "./Answers";
 
@@ -16,15 +15,13 @@ function Quiz() {
   let level = getInputFromStorage("level");
   let numQuestion = getInputFromStorage("numberOfQuestion");
 
-  let nextBtnClick = document.getElementById("next-question");
-
   useEffect(() => {
     fetchQuestionFromAPI();
-    // nextBtnClick.addEventListener("submit", fetchQuestionFromAPI());
-  }, []);
+  }, [curQuestionIndex]);
 
   async function fetchQuestionFromAPI() {
     try {
+      resetAnswerBtn();
       const response = await fetch(
         "https://opentdb.com/api.php?amount=10&category=23&difficulty=medium&type=multiple"
       );
@@ -36,6 +33,7 @@ function Quiz() {
       const getQuestionNum = document.getElementById("question-num");
       const getQuestionText = document.getElementById("question-text");
 
+      console.log("Fetching... " + curQuestionIndex);
       if (curQuestionIndex < questions.length) {
         // question number
         getQuestionNum.textContent = `Question ${curQuestionIndex + 1} of ${
@@ -45,9 +43,6 @@ function Quiz() {
         // display question text
         const curQuestion = questions[curQuestionIndex];
         getQuestionText.textContent = `${curQuestion.question}`;
-
-        // print out current question
-        console.log(curQuestion);
 
         // deadling with answers
         setCorrectAnswer(curQuestion.correct_answer);
@@ -64,9 +59,8 @@ function Quiz() {
   const handleNextBtnClick = () => {
     if (curQuestionIndex < 10) {
       // change this later
-      resetAnswerBtn();
-      setCurrentQuestionIndex(curQuestionIndex + 1);
-      fetchQuestionFromAPI();
+      
+      setCurrentQuestionIndex(curQuestionIndex + 1);    
     }
   };
 
@@ -77,23 +71,16 @@ function Quiz() {
 
     // Loop through the buttons and access their classes
     buttons.forEach((button) => {
-      // if (button.disabled) { // reset the disabled status
-      //   button.disabled = false;
-      // }
       const btnClasses = button.classList;
       if (btnClasses.contains("incorrect")) {
         btnClasses.remove("incorrect");
-        
-      } 
-      else if (btnClasses.contains("correct")) {
+      } else if (btnClasses.contains("correct")) {
         btnClasses.remove("correct");
-        
-      } 
+      }
       btnClasses.add("grid-item");
     });
     setDisableAnswers(false);
   };
-
 
   return (
     <div className="container bg">
@@ -116,7 +103,6 @@ function Quiz() {
                     incorrectAnswers={incorrectAnswers}
                     disableAnswers={disableAnswers}
                     setDisableAnswers={setDisableAnswers}
-                   
                   />
                 </div>
               </div>
