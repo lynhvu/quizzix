@@ -1,6 +1,6 @@
 import "../../styles/quiz/styles.css";
 import { addInputToStorage, getInputFromStorage } from "../StoreInputs";
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import Answers from "./Answers";
 
@@ -54,7 +54,7 @@ function Quiz() {
     try {
       resetAnswerBtn();
       const response = await fetch(
-        "https://opentdb.com/api.php?amount=10&category=23&difficulty=medium&type=multiple"
+        `https://opentdb.com/api.php?amount=${numQuestion}&category=${topic}&difficulty=${level}&type=multiple`
       );
       const data = await response.json();
 
