@@ -1,6 +1,7 @@
 import "../../styles/quiz/styles.css";
-import { getInputFromStorage } from "../StoreInputs";
-import React, { useEffect, useState } from "react";
+import { addInputToStorage, getInputFromStorage } from "../StoreInputs";
+import React, { useEffect, useState, useContext } from "react";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import Answers from "./Answers";
 
 function Quiz() {
@@ -8,6 +9,7 @@ function Quiz() {
   const [correctAnswer, setCorrectAnswer] = useState("");
   const [incorrectAnswers, setIncorrectAnswers] = useState([]);
   const [curQuestionIndex, setCurrentQuestionIndex] = useState(1);
+  const [totalScore, setTotalScore] = useState(0);
 
   // get data from local storage
   let topic = getInputFromStorage("categoryID");
@@ -22,25 +24,29 @@ function Quiz() {
     if (curQuestionIndex < numQuestion) {
       return (
         <button
-            type="submit"
-            className="next-btn mt-2"
-            id="next-btn"
-            onClick={handleNextBtnClick}
-          >
-            <span id="btn-text">Next question</span>
-          </button>
-      )
+          type="submit"
+          className="next-btn mt-2"
+          id="next-btn"
+          onClick={handleNextBtnClick}
+        >
+          <span id="btn-text">Next question</span>
+        </button>
+      );
     } else {
+      console.log("quiz total = " + totalScore);
+      addInputToStorage("score", totalScore);
       return (
-        <button
+        <Link to="/result">
+          <button
             type="submit"
             className="lv-btn mt-2"
             id="next-btn"
             onClick={handleNextBtnClick}
           >
-            <span id="btn-text">Submit</span>
+            <span id="btn-text">Complete quiz</span>
           </button>
-      )
+        </Link>
+      );
     }
   };
 
@@ -78,13 +84,14 @@ function Quiz() {
   }
 
   const handleNextBtnClick = () => {
-    if (curQuestionIndex - 1 < numQuestion) {
+    if (curQuestionIndex - 1 < numQuestion - 1) {
       console.log("cur = " + curQuestionIndex + " total = " + numQuestion);
       setCurrentQuestionIndex(curQuestionIndex + 1);
     } else {
       console.log("submit clicked");
     }
   };
+
 
   const resetAnswerBtn = () => {
     // Get the access to the buttons' attributes
@@ -125,6 +132,8 @@ function Quiz() {
                     incorrectAnswers={incorrectAnswers}
                     disableAnswers={disableAnswers}
                     setDisableAnswers={setDisableAnswers}
+                    totalScore={totalScore}
+                    setTotalScore={setTotalScore}
                   />
                 </div>
               </div>
@@ -135,7 +144,6 @@ function Quiz() {
         {/* next question button */}
         <div className="d-grid gap-2 d-flex justify-content-center">
           {renderBtn()}
-          
         </div>
       </div>
     </div>

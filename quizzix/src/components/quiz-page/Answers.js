@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
 
-const Answers = ({ correctAnswer, incorrectAnswers,disableAnswers, setDisableAnswers }) => {
+const Answers = ({
+  correctAnswer,
+  incorrectAnswers,
+  disableAnswers,
+  setDisableAnswers,
+  totalScore,
+  setTotalScore,
+}) => {
   const [shuffledAnswers, setShuffledAnswers] = useState([]);
-  
 
   // Concatenate the correct and incorrect answers into a single array
   const answers = [correctAnswer, ...incorrectAnswers];
@@ -24,6 +30,8 @@ const Answers = ({ correctAnswer, incorrectAnswers,disableAnswers, setDisableAns
 
     if (answer === correctAnswer) {
       document.getElementById(buttonID).className = "correct";
+      setTotalScore(totalScore + 1);
+      console.log(totalScore + "point");
       setDisableAnswers(true);
     } else {
       document.getElementById(buttonID).className = "incorrect";
