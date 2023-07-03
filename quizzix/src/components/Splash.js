@@ -47,6 +47,7 @@ function Splash() {
       // Get a reference to the <select> element
       const selectTopicElement = document.getElementById("topic-selection");
       const nextBtnElement = document.getElementById("next");
+      
       nextBtnElement.addEventListener('click', function(e) {
         if (selectTopicElement.value === '') {
           e.preventDefault();

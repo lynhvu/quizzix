@@ -53,6 +53,7 @@ function Quiz() {
   async function fetchQuestionFromAPI() {
     try {
       resetAnswerBtn();
+      console.log(numQuestion);
       const response = await fetch(
         `https://opentdb.com/api.php?amount=${numQuestion}&category=${topic}&difficulty=${level}&type=multiple`
       );
