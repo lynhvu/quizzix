@@ -43,11 +43,22 @@ function Splash() {
         input.addEventListener("input", fetchOptionsFromAPI);
       }
 
+      
       // Get a reference to the <select> element
       const selectTopicElement = document.getElementById("topic-selection");
-
+      const nextBtnElement = document.getElementById("next");
+      nextBtnElement.addEventListener('click', function(e) {
+        if (selectTopicElement.value === '') {
+          e.preventDefault();
+          selectTopicElement.classList.add('is-invalid');
+        }
+      })
       // Add an event listener to the <select> element
-      selectTopicElement.addEventListener("change", function () {
+      selectTopicElement.addEventListener("change", function (e) {
+        if (selectTopicElement.value !== '') {
+          selectTopicElement.classList.remove('is-invalid');
+        }
+        
         const selectedOption = this.options[this.selectedIndex];
         const selectedName = selectedOption.textContent;
         const selectedId = selectedOption.dataset.id;
@@ -75,7 +86,7 @@ function Splash() {
                 </option>
               </select>
               <div className="invalid-feedback">
-                Please provide a valid topic.
+                Please choose a topic.
               </div>
             </div>
           </div>
