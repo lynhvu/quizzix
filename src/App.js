@@ -12,7 +12,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Splash />} />
+        <Route path="/quizzix" element={<Splash />} />
         <Route path="/difficulty" element={<Difficulty />} />
         <Route path="/numquestion" element={<NumberOfQuestion />} />
         <Route path="/quiz" element={<Quiz />} />
