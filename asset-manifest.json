@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/quizzix/static/css/main.0bef2e72.css",
+    "main.js": "/quizzix/static/js/main.ff1bd451.js",
+    "static/js/787.692b3223.chunk.js": "/quizzix/static/js/787.692b3223.chunk.js",
+    "static/media/splashbg.jpeg": "/quizzix/static/media/splashbg.efb3c9fa02e1266d38bc.jpeg",
+    "static/media/logo-nobg.png": "/quizzix/static/media/logo-nobg.0c46e86b61c33911cf10.png",
+    "index.html": "/quizzix/index.html",
+    "main.0bef2e72.css.map": "/quizzix/static/css/main.0bef2e72.css.map",
+    "main.ff1bd451.js.map": "/quizzix/static/js/main.ff1bd451.js.map",
+    "787.692b3223.chunk.js.map": "/quizzix/static/js/787.692b3223.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0bef2e72.css",
+    "static/js/main.ff1bd451.js"
+  ]
+}
