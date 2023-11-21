@@ -22,7 +22,7 @@ function Result() {
 
         {/* next question button */}
         <div className="d-grid gap-2 d-flex justify-content-center">
-          <Link to="/">
+          <Link to="/quizzix">
             <button type="submit" className="lv-btn mt-2" id="next-btn">
               <span id="btn-text">Restart</span>
             </button>
